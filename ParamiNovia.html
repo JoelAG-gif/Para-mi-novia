@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Para ti, mi amor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      background-image: url('fondo-romantico.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      font-family: 'Poppins', sans-serif;
+      color: #3a3a3a;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .fade-in {
+      animation: fadeInZoom 1.5s ease-out both;
+    }
+
+    @keyframes fadeInZoom {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #d63384; }
+    }
+
+    .welcome-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1000;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .typewriter {
+      overflow: hidden;
+      border-right: 0.15em solid #d63384;
+      white-space: nowrap;
+      margin: 20px auto;
+      letter-spacing: 0.15em;
+      animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+      font-size: 1.2em;
+      color: #bf296f;
+      max-width: 90%;
+    }
+
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      margin: 30px auto 0;
+      text-align: center;
+    }
+
+    .carousel-container img {
+      width: 320px;
+      height: 418px;
+      object-fit: cover;
+      border-radius: 15px;
+      display: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+    }
+
+    .carousel-container img.active {
+      display: block;
+    }
+
+    .carousel-container img:hover {
+      transform: rotateY(5deg) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .carousel-buttons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .carousel-buttons button {
+      background: #f0f0f3;
+      border-radius: 50%;
+      border: none;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #d63384;
+      box-shadow: 6px 6px 10px #d1d1d1, -6px -6px 10px #ffffff;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .carousel-buttons button:hover {
+      box-shadow: inset 4px 4px 8px #d1d1d1, inset -4px -4px 8px #ffffff;
+      background-color: #ffe6f0;
+      color: #bf296f;
+      transform: scale(1.1);
+    }
+
+    .welcome-screen button {
+      background-color: #d63384;
+      color: white;
+      border: none;
+      padding: 20px 40px;
+      border-radius: 20px;
+      font-size: 1.3em;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      animation: pulse 2s infinite;
+      margin-top: 20px;
+    }
+
+    .welcome-screen button:hover {
+      background-color: #bf296f;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 120px auto 50px;
+      background: linear-gradient(135deg, #ffe6f0, #f7c8d6);
+      padding: 40px 20px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(214, 51, 132, 0.4);
+      animation: fadeIn 2s ease;
+      display: none;
+      color: #4a2e42;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5em;
+      color: #d63384;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    p {
+      font-size: 1.15em;
+      line-height: 1.8;
+      color: #4a2e42;
+      margin-bottom: 20px;
+    }
+
+    em {
+      color: #bf4080;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Nuevo estilo para el texto flotante */
+    .floating-love {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2em;
+      color: #d63384;
+      font-family: 'Great Vibes', cursive;
+      animation: float 4s ease-in-out infinite;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -20px); }
+      100% { transform: translate(-50%, 0); }
+    }
+
+    @media screen and (max-width: 600px) {
+      .container {
+        margin: 100px 10px 40px;
+        padding: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      .carousel-buttons button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 🔐 Protección por contraseña -->
+  <script>
+    const clave = prompt("Esta página está protegida 🔒\nIngresa la contraseña:");
+    if (clave !== "miamor123") {
+      document.body.innerHTML = "<h2 style='text-align:center; color:red;'>Acceso denegado ❌</h2>";
+    }
+  </script>
+
+  <div class="welcome-screen" id="welcomeScreen">
+    <h1 class="fade-in">💖 Para ti, mi amor</h1>
+    <p class="typewriter">"Eres la casualidad más bonita que llegó a mi vida..."</p>
+    <button onclick="iniciarCarta()">🎶 Reproducir canción y ver la carta</button>
+  </div>
+
+  <!-- Texto flotante "Te amo" -->
+  <div class="floating-love">💗 Te amo 💗</div>
+
+  <div class="container" id="carta">
+    <h1>Mi amor, feliz cumpleaños y feliz aniversario 💞</h1>
+    <p>Hoy no solo celebro el día en que naciste, sino también el tiempo que hemos construido juntos. Este año es diferente. Estamos lejos físicamente, pero te siento más cerca que nunca, porque la distancia no puede con lo que sentimos. Ni con lo que somos.</p>
+    <p>1 año con 10 meses ya casi 2 años caminando de la mano, y aunque hoy estemos en distintos lugares del mundo, seguimos caminando juntos. Porque tu amor sigue aquí, en mi vida, en cada rincón de esta casa que compartimos, y en cada uno de los sueños que aún nos esperan.</p>
+    <p>Tu decisión de viajar, de trabajar lejos, de dar este paso tan valiente… me llena de orgullo. Lo haces por ti, por nosotros, por esa vida que tanto deseamos: nuestra casa, nuestros hijos, nuestro futuro.</p>
+    <p>Y aunque te extraño con el alma, también te admiro. Porque amar no es solo estar —es también apoyar, confiar y sostener desde lejos. Y yo te espero con amor y con fe.</p>
+    <p>Como dice esta canción:</p>
+    <p><em>“Te amo, desde ese primer momento en que te vi...<br>
+      Te amo, y aunque no estés aquí, siento que estás junto a mí.”</em></p>
+    <p>Sí, mi amor: seguimos siendo más que dos, incluso ahora, separados por un océano o un vuelo de muchas horas. Porque te llevo en mí, en mis pensamientos diarios, en cada plan que imagino con tu nombre.</p>
+    <p>Gracias por todo lo que eres.<br>Gracias por tu valentía.<br>Gracias por elegirme, incluso cuando hay kilómetros de por medio.<br>Y gracias por creer tanto en lo nuestro como yo.</p>
+    <p>Hoy quiero regalarte mi palabra, mi amor intacto, y una promesa:<br>Voy a seguir eligiéndote cada día, esté donde esté.<br>Voy a esperarte con paciencia, con alegría, y con los brazos abiertos.<br>Y cuando volvamos a abrazarnos, no va a haber distancia que nos separe otra vez.</p>
+    <p><strong>Feliz cumpleaños, mi vida.<br>Feliz aniversario, mi amor.<br>Feliz todo… porque, estés donde estés, tú sigues siendo mi hogar.</strong></p>
+    <p style="margin-top: 30px;">Con todo lo que soy,<br><strong>[De tu futuro esposo]</strong></p>
+
+    <div class="carousel-container fade-in">
+      <img src="IMAGEN1.jpeg" class="active" id="slide0" />
+      <img src="IMAGEN2.jpeg" id="slide1" />
+      <img src="IMAGEN3.jpeg" id="slide2" />
+      <img src="IMAGEN4.jpeg" id="slide3" />
+      <img src="IMAGEN5.jpeg" id="slide4" />
+      <img src="IMAGEN6.jpeg" id="slide5" />
+      <img src="IMAGEN7.jpeg" id="slide6" />
+      <img src="IMAGEN8.jpeg" id="slide7" />
+      <img src="IMAGEN19.jpeg" id="slide8" />
+      <img src="IMAGEN9.jpeg" id="slide9" />
+      <img src="IMAGEN10.jpeg" id="slide10" />
+      <img src="IMAGEN11.jpeg" id="slide11" />
+      <img src="IMAGEN12.jpeg" id="slide12" />
+      <img src="IMAGEN13.jpeg" id="slide13" />
+      <img src="IMAGEN20.jpeg" id="slide14" />
+      <img src="IMAGEN14.jpeg" id="slide15" />
+      <img src="IMAGEN15.jpeg" id="slide16" />
+      <img src="IMAGEN16.jpeg" id="slide17" />
+      <img src="IMAGEN17.jpeg" id="slide18" />
+      <img src="IMAGEN18.jpeg" id="slide19" />
+      <div class="carousel-buttons">
+        <button onclick="prevImage()">⟨</button>
+        <button onclick="nextImage()">⟩</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="loveSong" loop>
+    <source src="te-amo-franco-de-vita.mp3" type="audio/mpeg" />
+    Tu navegador no soporta audio.
+  </audio>
+
+  <script>
+    let current = 0;
+    const total = 20; // Corregido: total imágenes = 20 (de 0 a 19)
+
+    function showSlide(index) {
+      for (let i = 0; i < total; i++) {
+        document.getElementById(`slide${i}`).classList.remove('active');
+      }
+      document.getElementById(`slide${index}`).classList.add('active');
+    }
+
+    function nextImage() {
+      current = (current + 1) % total;
+      showSlide(current);
+    }
+
+    function prevImage() {
+      current = (current - 1 + total) % total;
+      showSlide(current);
+    }
+
+    function iniciarCarta() {
+      document.getElementById('welcomeScreen').style.display = 'none';
+      document.getElementById('carta').style.display = 'block';
+      document.getElementById('loveSong').play().catch(() => {
+        alert('Activa el sonido para escuchar la música 🎶');
+      });
+    }
+  </script>
+</body>
+</html>
+
